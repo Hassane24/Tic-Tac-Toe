@@ -1,0 +1,44 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: grey;
+  padding: 0%;
+  margin: 0%;
+}
+
+.title {
+  color: rgb(83, 170, 182);
+  text-align: center;
+  margin-top: 24px;
+  font-weight: bold;
+  font-size: 3.5rem;
+  font-family: "MochiyPopPOne-Regular", Arial, Helvetica, sans-serif, Impact,
+    "Haettenschweiler", "Arial Narrow Bold";
+}
+
+.grid-container {
+  display: grid;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.boxes {
+  background-color: white;
+  width: 100px;
+  height: 100px;
+  margin: 8px;
+}
