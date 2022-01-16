@@ -37,6 +37,12 @@ body {
 }
 
 .boxes {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 3em;
   background-color: white;
   width: 100px;
   height: 100px;
