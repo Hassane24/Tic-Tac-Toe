@@ -1,19 +1,24 @@
 const gameBoard = (() => {
-  const board = ["X", "O", "X", "O", "X", "O", "X", "O", "X"];
+  let board = new Array(9).fill("");
 
   const getBoard = () => {
     return [...board];
   };
 
+  const clearBoard = () => {
+    board = new Array(9).fill("");
+  };
+
   return {
     getBoard,
+    clearBoard,
   };
 })();
 
 const displayController = (() => {
   const init = () => {
-    cacheDom();
     bindEvents();
+    clearDisplay();
   };
 
   const cacheDom = () => {
@@ -25,13 +30,23 @@ const displayController = (() => {
     let board = gameBoard.getBoard();
     for (let i = 0; i < board.length; i++) {
       let box = boxes[i];
-      console.log(box);
       box.addEventListener("click", (e) => {
         if (e.target.id == i) {
           box.textContent = board[i];
         }
       });
     }
+  };
+
+  const clearDisplay = () => {
+    const boxes = cacheDom();
+    const clearButton = document.querySelector(".clear-button");
+    clearButton.addEventListener("click", () => {
+      gameBoard.clearBoard();
+      boxes.forEach((box) => {
+        box.textContent = "";
+      });
+    });
   };
 
   return {
