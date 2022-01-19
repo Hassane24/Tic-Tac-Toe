@@ -24,20 +24,18 @@ const displayController = (() => {
     let boxes = cacheDom();
     let board = gameBoard.getBoard();
     for (let i = 0; i < board.length; i++) {
-      boxes.forEach((box) => {
-        box.addEventListener("click", (e) => {
-          console.log(board[i]);
-          console.log(e);
-          if (e.target.id == `${i}`) return box.textContent == board[i];
-        });
+      let box = boxes[i];
+      console.log(box);
+      box.addEventListener("click", (e) => {
+        if (e.target.id == i) {
+          box.textContent = board[i];
+        }
       });
     }
   };
 
   return {
     init,
-    cacheDom,
-    bindEvents,
   };
 })();
 
