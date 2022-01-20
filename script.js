@@ -1,5 +1,33 @@
 const gameBoard = (() => {
+  let boxes = document.querySelectorAll(".boxes");
+  let players = [Player("X", true), Player("O", false)];
   let board = new Array(9).fill("");
+
+  const pushMarkToArray = () => {
+    for (let i = 0; i < board.length; i++) {
+      let box = boxes[i];
+      box.addEventListener("click", (e) => {
+        if (e.target.id == i) {
+          if (players[0].isActive) {
+            board[e.target.id] = "X";
+            switchPlayers();
+            displayController.bindEvents();
+          }
+        }
+        if (e.target.id == i) {
+          if (players[1].isActive) {
+            board[e.target.id] = "O";
+            switchPlayers();
+            displayController.bindEvents();
+          }
+        }
+      });
+    }
+  };
+
+  const switchPlayers = () => {
+    players.forEach((player) => player.toggle());
+  };
 
   const getBoard = () => {
     return [...board];
@@ -12,8 +40,11 @@ const gameBoard = (() => {
   return {
     getBoard,
     clearBoard,
+    pushMarkToArray,
   };
 })();
+
+gameBoard.pushMarkToArray();
 
 const displayController = (() => {
   const init = () => {
@@ -51,7 +82,27 @@ const displayController = (() => {
 
   return {
     init,
+    bindEvents,
+    clearDisplay,
   };
 })();
 
 displayController.init();
+
+function Player(icon, playing = false) {
+  let state = {
+    icon,
+    playing,
+  };
+  return {
+    get icon() {
+      return state.icon;
+    },
+    get isActive() {
+      return state.playing;
+    },
+    toggle() {
+      state.playing = !state.playing;
+    },
+  };
+}
