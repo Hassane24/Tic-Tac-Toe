@@ -2,24 +2,22 @@ const gameBoard = (() => {
   let boxes = document.querySelectorAll(".boxes");
   let players = [Player("X", true), Player("O", false)];
   let board = new Array(9).fill("");
+  console.log(players[0].icon);
 
   const pushMarkToArray = () => {
     for (let i = 0; i < board.length; i++) {
       let box = boxes[i];
       box.addEventListener("click", (e) => {
-        if (e.target.id == i) {
-          if (players[0].isActive) {
-            board[e.target.id] = "X";
-            switchPlayers();
-            displayController.bindEvents();
-          }
+        if (players[0].isActive && box.textContent === "") {
+          board[i] = players[0].icon;
+          displayController.updateDisplay();
+          switchPlayers();
         }
-        if (e.target.id == i) {
-          if (players[1].isActive) {
-            board[e.target.id] = "O";
-            switchPlayers();
-            displayController.bindEvents();
-          }
+
+        if (players[1].isActive && box.textContent === "") {
+          board[i] = players[1].icon;
+          switchPlayers();
+          displayController.updateDisplay();
         }
       });
     }
@@ -48,7 +46,7 @@ gameBoard.pushMarkToArray();
 
 const displayController = (() => {
   const init = () => {
-    bindEvents();
+    updateDisplay();
     clearDisplay();
   };
 
@@ -56,16 +54,12 @@ const displayController = (() => {
     return document.querySelectorAll(".boxes");
   };
 
-  const bindEvents = () => {
+  const updateDisplay = () => {
     let boxes = cacheDom();
     let board = gameBoard.getBoard();
     for (let i = 0; i < board.length; i++) {
       let box = boxes[i];
-      box.addEventListener("click", (e) => {
-        if (e.target.id == i) {
-          box.textContent = board[i];
-        }
-      });
+      if (box.id == i) box.textContent = board[i];
     }
   };
 
@@ -82,7 +76,7 @@ const displayController = (() => {
 
   return {
     init,
-    bindEvents,
+    updateDisplay,
     clearDisplay,
   };
 })();
