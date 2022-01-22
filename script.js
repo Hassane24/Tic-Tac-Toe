@@ -3,6 +3,10 @@ const gameBoard = (() => {
   let players = [Player("X", true), Player("O", false)];
   let board = new Array(9).fill("");
 
+  const init = () => {
+    pushMarkToArray();
+  };
+
   const pushMarkToArray = () => {
     for (let i = 0; i < board.length; i++) {
       let box = boxes[i];
@@ -31,57 +35,57 @@ const gameBoard = (() => {
       (board[0] == x && board[1] == x && board[2] == x) ||
       (board[0] == o && board[1] == o && board[2] == o)
     ) {
-      alert(`The winner is ${board[0]}`);
       clearBoard();
+      return alert(`The winner is ${board[0]}`);
     }
     if (
       (board[3] == x && board[4] == x && board[5] == x) ||
       (board[3] == o && board[4] == o && board[5] == o)
     ) {
-      alert(`The winner is ${board[3]}`);
       clearBoard();
+      return alert(`The winner is ${board[3]}`);
     }
     if (
       (board[6] == x && board[7] == x && board[8] == x) ||
       (board[6] == o && board[7] == o && board[8] == o)
     ) {
-      alert(`The winner is ${board[6]}`);
       clearBoard();
+      return alert(`The winner is ${board[6]}`);
     }
     if (
       (board[0] == x && board[3] == x && board[6] == x) ||
       (board[0] == o && board[3] == o && board[6] == o)
     ) {
-      alert(`The winner is ${board[0]}`);
       clearBoard();
+      return alert(`The winner is ${board[0]}`);
     }
     if (
       (board[1] == x && board[4] == x && board[7] == x) ||
       (board[1] == o && board[4] == o && board[7] == o)
     ) {
-      alert(`The winner is ${board[1]}`);
       clearBoard();
+      return alert(`The winner is ${board[1]}`);
     }
     if (
       (board[2] == x && board[5] == x && board[8] == x) ||
       (board[2] == o && board[5] == o && board[8] == o)
     ) {
-      alert(`The winner is ${board[2]}`);
       clearBoard();
+      return alert(`The winner is ${board[2]}`);
     }
     if (
       (board[0] == x && board[4] == x && board[8] == x) ||
       (board[0] == o && board[4] == o && board[8] == o)
     ) {
-      alert(`The winner is ${board[0]}`);
       clearBoard();
+      return alert(`The winner is ${board[0]}`);
     }
     if (
       (board[2] == x && board[4] == x && board[6] == x) ||
       (board[2] == o && board[4] == o && board[6] == o)
     ) {
-      alert(`The winner is ${board[2]}`);
       clearBoard();
+      return alert(`The winner is ${board[2]}`);
     }
     if (
       board[0] !== "" &&
@@ -93,8 +97,10 @@ const gameBoard = (() => {
       board[6] !== "" &&
       board[7] !== "" &&
       board[8] !== ""
-    )
-      alert("DRAWW!!");
+    ) {
+      clearBoard();
+      return alert("DRAWW!!");
+    }
   };
 
   const switchPlayers = () => {
@@ -114,11 +120,11 @@ const gameBoard = (() => {
   return {
     getBoard,
     clearBoard,
-    pushMarkToArray,
+    init,
   };
 })();
 
-gameBoard.pushMarkToArray();
+gameBoard.init();
 
 const displayController = (() => {
   const init = () => {
