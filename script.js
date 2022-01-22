@@ -33,7 +33,6 @@ const gameBoard = (() => {
     ) {
       alert(`The winner is ${board[0]}`);
       clearBoard();
-      displayController.clearDisplay();
     }
     if (
       (board[3] == x && board[4] == x && board[5] == x) ||
@@ -41,7 +40,6 @@ const gameBoard = (() => {
     ) {
       alert(`The winner is ${board[3]}`);
       clearBoard();
-      displayController.clearDisplay();
     }
     if (
       (board[6] == x && board[7] == x && board[8] == x) ||
@@ -49,7 +47,6 @@ const gameBoard = (() => {
     ) {
       alert(`The winner is ${board[6]}`);
       clearBoard();
-      displayController.clearDisplay();
     }
     if (
       (board[0] == x && board[3] == x && board[6] == x) ||
@@ -57,7 +54,6 @@ const gameBoard = (() => {
     ) {
       alert(`The winner is ${board[0]}`);
       clearBoard();
-      displayController.clearDisplay();
     }
     if (
       (board[1] == x && board[4] == x && board[7] == x) ||
@@ -65,15 +61,13 @@ const gameBoard = (() => {
     ) {
       alert(`The winner is ${board[1]}`);
       clearBoard();
-      displayController.clearDisplay();
     }
     if (
-      (board[2] == x && board[4] == x && board[7] == x) ||
-      (board[2] == o && board[4] == o && board[7] == o)
+      (board[2] == x && board[5] == x && board[8] == x) ||
+      (board[2] == o && board[5] == o && board[8] == o)
     ) {
       alert(`The winner is ${board[2]}`);
       clearBoard();
-      displayController.clearDisplay();
     }
     if (
       (board[0] == x && board[4] == x && board[8] == x) ||
@@ -81,7 +75,6 @@ const gameBoard = (() => {
     ) {
       alert(`The winner is ${board[0]}`);
       clearBoard();
-      displayController.clearDisplay();
     }
     if (
       (board[2] == x && board[4] == x && board[6] == x) ||
@@ -89,8 +82,19 @@ const gameBoard = (() => {
     ) {
       alert(`The winner is ${board[2]}`);
       clearBoard();
-      displayController.clearDisplay();
     }
+    if (
+      board[0] !== "" &&
+      board[1] !== "" &&
+      board[2] !== "" &&
+      board[3] !== "" &&
+      board[4] !== "" &&
+      board[5] !== "" &&
+      board[6] !== "" &&
+      board[7] !== "" &&
+      board[8] !== ""
+    )
+      alert("DRAWW!!");
   };
 
   const switchPlayers = () => {
