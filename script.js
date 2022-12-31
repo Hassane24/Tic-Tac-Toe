@@ -1,4 +1,14 @@
 const gameBoard = (() => {
+  const winningCombinations = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
   let boxes = document.querySelectorAll(".boxes");
   let players = [Player("X", true), Player("O", false)];
   let board = new Array(9).fill("");
@@ -11,14 +21,14 @@ const gameBoard = (() => {
     for (let i = 0; i < board.length; i++) {
       let box = boxes[i];
       box.addEventListener("click", () => {
-        if (players[0].isActive && box.textContent === "") {
-          board[i] = players[0].icon;
+        if (players[0].getPlayerRole() && box.textContent === "") {
+          board[i] = players[0].getIcon();
           displayController.updateDisplay();
           switchPlayers();
           checkWhoWon();
         }
-        if (players[1].isActive && box.textContent === "") {
-          board[i] = players[1].icon;
+        if (players[1].getPlayerRole() && box.textContent === "") {
+          board[i] = players[1].getIcon();
           displayController.updateDisplay();
           switchPlayers();
           checkWhoWon();
@@ -103,13 +113,9 @@ const gameBoard = (() => {
     }
   };
 
-  const switchPlayers = () => {
-    players.forEach((player) => player.toggle());
-  };
+  const switchPlayers = () => players.forEach((player) => player.toggle());
 
-  const getBoard = () => {
-    return [...board];
-  };
+  const getBoard = () => [...board];
 
   const clearBoard = () => {
     board = new Array(9).fill("");
@@ -170,15 +176,16 @@ function Player(icon, playing = false) {
     icon,
     playing,
   };
+
+  const getIcon = () => state.icon;
+
+  const getPlayerRole = () => state.playing;
+
+  const toggle = () => (state.playing = !state.playing);
+
   return {
-    get icon() {
-      return state.icon;
-    },
-    get isActive() {
-      return state.playing;
-    },
-    toggle() {
-      state.playing = !state.playing;
-    },
+    getIcon,
+    getPlayerRole,
+    toggle,
   };
 }
